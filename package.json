@@ -16,5 +16,8 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-native": "^0.74.5"
+  },
+  "dependencies": {
+    "@microsoft/react-native-clarity": "^4.0.4"
   }
 }
