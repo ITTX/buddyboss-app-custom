@@ -3,7 +3,7 @@
 
 @interface BuddybossCustomCode : NSObject <RCTBridgeModule>
 
-+ (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions withBridge:(RCTBridge *)bridge;
++ (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 + (void)rootViewVisible:(RCTRootView *)rootView;
 
 @end
