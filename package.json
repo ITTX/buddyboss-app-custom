@@ -16,5 +16,11 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-native": "^0.74.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "eslint": "^9.26.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.1.0"
   }
 }

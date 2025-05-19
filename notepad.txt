@@ -1,0 +1,41 @@
+import React from "react";
+import PrevNext from "@src/components/Course/PrevNext";
+
+ const PrevNextComponent = props => {
+
+   const { onQuizClick,
+           onLessonClick,
+           onTopicClick,
+           global,
+           colors,
+           t,
+           prevObject,
+           nextObject,
+           courseId,
+           nextLockedAlert } = props;
+
+   window.__lspriv.onLessonClick = onLessonClick;
+   window.__lspriv.onTopicClick = onTopicClick;
+   window.__lspriv.onQuizClick = onQuizClick;
+   window.__lspriv.prevObject = prevObject;
+   window.__lspriv.nextObject = nextObject;
+
+   if (! nextObject && ! prevObject){
+       return null;
+   }
+
+   return (
+       <PrevNext
+           {...{ onQuizClick, onLessonClick, onTopicClick }}
+           global={global}
+           colors={colors}
+           t={t}
+           prevObject={prevObject}
+           nextObject={nextObject}
+           courseId={courseId}
+           nextLockedAlert={nextLockedAlert}
+       />
+   );
+};
+
+export default PrevNextComponent;
