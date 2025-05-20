@@ -18,12 +18,16 @@ const LearnTopicActionComponent = ({
   completeDisabled,
   nextObject,
 }) => {
+
+  // 1) local completed flag
+  const [localCompleted, setLocalCompleted] = useState(topicVM.completed);
+
   // 2) two animated values: one for background‐color, one for icon opacity
   const bgAnim = useRef(
-    new Animated.Value(topicVM.completed ? 1 : 0)
+    new Animated.Value(localCompleted ? 1 : 0)
   ).current;
   const iconAnim = useRef(
-    new Animated.Value(topicVM.completed ? 1 : 0)
+    new Animated.Value(localCompleted ? 1 : 0)
   ).current;
 
   // tint the icon style once
@@ -34,18 +38,18 @@ const LearnTopicActionComponent = ({
   };
 
   const handlePress = () => {
-    if (topicVM.completed) {
+    if (localCompleted) {
       if (nextObject) {
         window.__lspriv.objectClick(nextObject)
       }
     }
 
-    if (topicVM.completed || completeDisabled) return;
+    if (localCompleted || completeDisabled) return;
 
     // 1) flip our local flag
-    topicVM.completed = true;
+    setLocalCompleted(true);
 
-    // 2) fire the "mark as complete" callback
+    // 2) fire the "mark as complete" callback in background
     onCompleteTopicClick();
 
     // 3) animate BG color & icon fade-in in parallel
@@ -66,7 +70,7 @@ const LearnTopicActionComponent = ({
         if (nextObject) {
           window.__lspriv.objectClick(nextObject);
         }
-      }, 150);
+      }, 200);
     });
   };
 
@@ -77,7 +81,7 @@ const LearnTopicActionComponent = ({
   });
 
   // the text color also flips when completed
-  const textColor = topicVM.completed
+  const textColor = localCompleted
     ? (isColorDark(colors.bodyFrontBg) ? "white" : "black")
     : colors.primaryButtonColor;
 
@@ -106,7 +110,7 @@ const LearnTopicActionComponent = ({
             <View style={global.row}>
               <View style={global.linkWithArrow}>
                 {/** loading spinner (only before we flip) **/}
-                {!topicVM.completed && completing && (
+                {!localCompleted && completing && (
                   <ActivityIndicator
                     animating
                     color={colors.primaryButtonColor}
@@ -117,7 +121,7 @@ const LearnTopicActionComponent = ({
 
                 {/** check icon, wrapped in an Animated.View to drive opacity **/}
                 <Animated.View style={{ opacity: iconAnim }}>
-                  {topicVM.completed && (
+                  {localCompleted && (
                     <Icon
                       webIcon=""
                       icon={{ fontIconName: "check", weight: 200 }}
@@ -133,7 +137,7 @@ const LearnTopicActionComponent = ({
                   ]}
                 >
                   {t(
-                    topicVM.completed
+                    localCompleted
                       ? "lessonTopic:completed"
                       : "lessonTopic:markAsComplete"
                   )}

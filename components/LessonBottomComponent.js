@@ -46,7 +46,7 @@ const LessonBottomComponent = props => {
             )
         }
     }
-    window.__lspriv.lessonNavigate = lessonNavigateNext;
+    window.__lspriv.lessonNavigateNext = lessonNavigateNext;
 
     return null;
 

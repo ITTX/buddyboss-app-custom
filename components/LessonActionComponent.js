@@ -18,9 +18,12 @@ const LessonActionComponent = ({
     labels,
     nextObject,
 }) => {
+    console.log("LessonActionComponent", lesson);
+
     var _lessonActionCompleteIcon = global.lessonActionCompleteIcon;
     _lessonActionCompleteIcon.tintColor = colors.coursesLabelCompleted;
     _lessonActionCompleteIcon.color = colors.coursesLabelCompleted;
+    var lessonImmediatelyCompletable = lesson.topicsCount == 0 && lesson.quizCount == 0 && lesson.completed == false
     return (<AuthWrapper actionOnGuestLogin={"hide"}>
     {showComplete && (
         <View
@@ -44,18 +47,19 @@ const LessonActionComponent = ({
                     },
                     global.completeLessonButtonW
                 ]}
-                disabled = {false} // lesson.completed || 
+                disabled = {completeDisabled} 
                 onPress={() => {
+                    if (lessonImmediatelyCompletable) {
+                        onCompleteButtonClick()
+                        lesson.completed = true
+                    }
                     if (lesson.completed) {
-                        window.__lspriv.lessonNavigate(lesson.id)
+                        window.__lspriv.lessonNavigateNext(lesson.id)
                         return
                     }
                     if (window.__lspriv.nextTopicNavigate) {
                         window.__lspriv.nextTopicNavigate()
                         return
-                    }
-                    if (!(lesson.completed || completeDisabled)) {
-                        onCompleteButtonClick()
                     }
                 }}
             >
@@ -98,12 +102,8 @@ const LessonActionComponent = ({
                             {t(
                                 lesson.completed
                                     ? "lesson:completed"
-                                    : "course:continue",
+                                    : ( (lessonImmediatelyCompletable) ? "lesson:completeLesson" : "course:continue"),
                                 { label: labels.lesson.toLowerCase() }
-                            ) + (
-                                lesson.completed
-                                    ? " >>>"
-                                    : ""
                             )}
                         </Text>
                     </View>
