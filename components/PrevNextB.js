@@ -57,6 +57,7 @@ const PrevNext = ({
                ]}
                onPress={() => {
                    if (prevObject !== "disabled") {
+                        window.__lspriv.nextTopicNavigate = null;
                        onObjectClick(prevObject, onQuizClick, onTopicClick, onLessonClick);
                    }
                }}
@@ -84,6 +85,7 @@ const PrevNext = ({
                style={[global.wrappedButton, global.wrappedTextButton]}
                onPress={() => {
                    if (nextObject !== "disabled") {
+                        window.__lspriv.nextTopicNavigate = null;
                        onObjectClick(nextObject, onQuizClick, onTopicClick, onLessonClick);
                    } else if (typeof nextLockedAlert === "function") {
                        nextLockedAlert();

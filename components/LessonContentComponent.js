@@ -21,12 +21,13 @@ const mLessonContentComponent = props => {
 
     var mtopicId = null;
     window.__lspriv.nextTopicNavigate = null;
-    
+
     topics.map((topic) => {
         if (mtopicId == null && !topic.completed) {
             const mtopic = topic
             mtopicId = mtopic.id
             window.__lspriv.nextTopicNavigate = () => {
+                window.__lspriv.nextTopicNavigate = null;
                 mtopic.type = "topic"
                 mtopic.parent = mtopic.lesson
                 window.__lspriv.objectClick(mtopic)
@@ -39,6 +40,7 @@ const mLessonContentComponent = props => {
                 const mtopic = quiz
                 mtopicId = mtopic.id
                 window.__lspriv.nextTopicNavigate = () => {
+                    window.__lspriv.nextTopicNavigate = null;
                     mtopic.type = "quiz"
                     mtopic.parent = mtopic.lesson
                     mtopic.parentType = "lesson"
