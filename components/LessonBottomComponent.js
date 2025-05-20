@@ -35,7 +35,7 @@ const LessonBottomComponent = props => {
                 key: course.id.toString()
             })
         } else {
-            console.log(navigation.setParams(
+            navigation.setParams(
                 {
                     courseId: course.id,
                     lessonId: nextLesson,
@@ -45,7 +45,7 @@ const LessonBottomComponent = props => {
                     },
                     courseRouteName: "CoursesSingleScreen"
                 }
-            ))
+            )
         }
     }
     window.__lspriv.lessonNavigate = lessonNavigateNext;
