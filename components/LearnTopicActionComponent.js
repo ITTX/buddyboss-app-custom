@@ -17,6 +17,9 @@ const LearnTopicActionComponent = ({
   completeDisabled,
   nextObject,
 }) => {
+  var _learnTopicActionCompleteIcon = global.learnTopicActionCompleteIcon;
+  _learnTopicActionCompleteIcon.tintColor = colors.coursesLabelCompleted;
+  _learnTopicActionCompleteIcon.color = colors.coursesLabelCompleted;
   return (
   <AuthWrapper actionOnGuestLogin={"hide"}>
     {showComplete && (
@@ -44,6 +47,7 @@ const LearnTopicActionComponent = ({
           disabled={false}
           onPress={() => {
             if (!(topicVM.completed || completeDisabled)) {
+              topicVM.completed = true;
               onCompleteTopicClick()
             }
             if (nextObject) {
@@ -66,7 +70,7 @@ const LearnTopicActionComponent = ({
                 <Icon
                   webIcon={""}
                   icon={{fontIconName: "check", weight: 200}}
-                  styles={global.learnTopicActionCompleteIcon}
+                  styles={_learnTopicActionCompleteIcon}
                 />
               )}
               <Text

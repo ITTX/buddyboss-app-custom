@@ -18,6 +18,9 @@ const LessonActionComponent = ({
     labels,
     nextObject,
 }) => {
+    var _lessonActionCompleteIcon = global.lessonActionCompleteIcon;
+    _lessonActionCompleteIcon.tintColor = colors.coursesLabelCompleted;
+    _lessonActionCompleteIcon.color = colors.coursesLabelCompleted;
     return (<AuthWrapper actionOnGuestLogin={"hide"}>
     {showComplete && (
         <View
@@ -70,7 +73,7 @@ const LessonActionComponent = ({
                             <Icon
                                 webIcon={""}
                                 icon={{fontIconName: "check", weight: 200}}
-                                styles={global.lessonActionCompleteIcon}
+                                styles={_lessonActionCompleteIcon}
                             />
                         )}
                         <Text
