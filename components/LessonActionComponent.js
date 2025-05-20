@@ -47,8 +47,12 @@ const LessonActionComponent = ({
                 disabled = {false} // lesson.completed || 
                 onPress={() => {
                     if (lesson.completed) {
-                        window.__lspriv.lessonNavigate(lesson.id);
-                        return;
+                        window.__lspriv.lessonNavigate(lesson.id)
+                        return
+                    }
+                    if (window.__lspriv.nextTopicNavigate) {
+                        window.__lspriv.nextTopicNavigate()
+                        return
                     }
                     if (!(lesson.completed || completeDisabled)) {
                         onCompleteButtonClick()
@@ -94,7 +98,7 @@ const LessonActionComponent = ({
                             {t(
                                 lesson.completed
                                     ? "lesson:completed"
-                                    : "lesson:completeLesson",
+                                    : "course:continue",
                                 { label: labels.lesson.toLowerCase() }
                             ) + (
                                 lesson.completed

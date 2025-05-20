@@ -2,6 +2,7 @@ import { Alert } from 'react-native';
 import PrevNextComponent from './components/PrevNextB';
 import LessonBottomComponent from "./components/LessonBottomComponent";
 import LessonActionComponent from "./components/LessonActionComponent";
+import LessonContentComponent from './components/LessonContentComponent';
 import LearnTopicActionComponent from "./components/LearnTopicActionComponent";
 
 const linguaSmartVersionInfo = {
@@ -23,6 +24,7 @@ export const applyCustomCode = externalCodeSetup => {
 		window.__lspriv = window.__lspriv || {};
 	});
 
+	// custom shake menu for version info
 	const menuItems = [{ 
 		title: linguaSmartVersionInfo.name, 
 		onPress: () => Alert.alert(linguaSmartVersionInfo.descriptionString()) 
@@ -37,6 +39,7 @@ export const applyCustomCode = externalCodeSetup => {
 	// manage lesson navigation
 	externalCodeSetup.lessonSingleScreenApi.setLessonActionComponent(props => <LessonActionComponent {...props} />)
 	externalCodeSetup.lessonSingleScreenApi.setAfterMaterialsComponent(props => <LessonBottomComponent {...props}/>)
+	externalCodeSetup.lessonSingleScreenApi.setLessonContentComponent(props => <LessonContentComponent {...props} />)
 
 	// manage learn topic navigation
 	externalCodeSetup.learnTopicSingleScreenApi.setLearnTopicActionComponent(props => <LearnTopicActionComponent {...props} />)

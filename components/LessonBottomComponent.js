@@ -1,5 +1,3 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
 const LessonBottomComponent = props => {
 
     const {
@@ -51,19 +49,7 @@ const LessonBottomComponent = props => {
     window.__lspriv.lessonNavigate = lessonNavigateNext;
 
     return null;
-    // return <View style={{
-    //     backgroundColor: colors.bodyFrontBg,
-    //     paddingHorizontal: 20,
-    //     paddingBottom: 20,
-    //     minHeight: 100,
-    // }}>
-    //     <Text>This lesson is part of the {course.title.rendered} course </Text>
-    //     <TouchableOpacity onPress={back}>
-    //         <Text>
-    //             Back To Course
-    //         </Text>
-    //     </TouchableOpacity>
-    // </View>
+
 }
 
 export default LessonBottomComponent;
