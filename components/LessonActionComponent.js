@@ -66,9 +66,8 @@ const LessonActionComponent = ({
                 <View style={global.row}>
                     <View style={global.linkWithArrow}>
                         {!lesson.completed ? (
-                            completing && (
+                            completing && window.__lspriv.params.completingSpinnerEnabled && (
                                 <>
-                                    <Text style={{color: "#fff"}}>Completing...</Text>
                                     <ActivityIndicator
                                         animating={true}
                                         color={colors.primaryButtonColor}

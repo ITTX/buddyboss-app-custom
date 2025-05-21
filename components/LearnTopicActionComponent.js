@@ -110,7 +110,7 @@ const LearnTopicActionComponent = ({
             <View style={global.row}>
               <View style={global.linkWithArrow}>
                 {/** loading spinner (only before we flip) **/}
-                {!localCompleted && completing && (
+                {!localCompleted && completing && window.__lspriv.params.completingSpinnerEnabled && (
                   <ActivityIndicator
                     animating
                     color={colors.primaryButtonColor}

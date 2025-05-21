@@ -22,6 +22,11 @@ export const applyCustomCode = externalCodeSetup => {
 	externalCodeSetup.indexJsApi.addIndexJsFunction(() => {
 		console.log(linguaSmartVersionInfo.descriptionString());
 		window.__lspriv = window.__lspriv || {};
+		window.__lspriv.params = window.__lspriv.params || {};
+		window.__lspriv.params.customCode = {
+			linguaSmartVersionInfo: linguaSmartVersionInfo
+		};
+		window.__lspriv.params.completingSpinnerEnabled = false;
 	});
 
 	// custom shake menu for version info
