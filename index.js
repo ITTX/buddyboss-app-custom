@@ -6,11 +6,11 @@ import LessonContentComponent from './components/LessonContentComponent';
 import LearnTopicActionComponent from "./components/LearnTopicActionComponent";
 
 const linguaSmartVersionInfo = {
-		version: "0.1",
+		version: "0.1.1",
 		name: "LinguaSmart Custom Version",
 		description: "Custom version of LinguaSmart mobile app.",
 		descriptionString: () => {
-			return `${linguaSmartVersionInfo.description} v:${linguaSmartVersionInfo.version}`;
+			return `${linguaSmartVersionInfo.description} version ${linguaSmartVersionInfo.version}`;
 		}
 }
 
