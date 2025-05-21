@@ -18,8 +18,6 @@ const LessonActionComponent = ({
     labels,
     nextObject,
 }) => {
-    console.log("LessonActionComponent", lesson);
-
     var _lessonActionCompleteIcon = global.lessonActionCompleteIcon;
     _lessonActionCompleteIcon.tintColor = colors.coursesLabelCompleted;
     _lessonActionCompleteIcon.color = colors.coursesLabelCompleted;
