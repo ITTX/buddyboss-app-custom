@@ -1,3 +1,52 @@
-export const applyCustomCode = (externalCodeSetup: any) => {
+import { Alert } from 'react-native';
+import PrevNextComponent from './components/PrevNextB';
+import LessonBottomComponent from "./components/LessonBottomComponent";
+import LessonActionComponent from "./components/LessonActionComponent";
+import LessonContentComponent from './components/LessonContentComponent';
+import LearnTopicActionComponent from "./components/LearnTopicActionComponent";
+
+const linguaSmartVersionInfo = {
+		version: "0.1.1",
+		name: "LinguaSmart Custom Version",
+		description: "Custom version of LinguaSmart mobile app.",
+		descriptionString: () => {
+			return `${linguaSmartVersionInfo.description} version ${linguaSmartVersionInfo.version}`;
+		}
+}
+
+export const applyCustomCode = externalCodeSetup => {
 	// call custom code api here
+
+	externalCodeSetup.appInitialisationApi.setHomeScreenPrefetchEnabled(true)
+
+	externalCodeSetup.indexJsApi.addIndexJsFunction(() => {
+		console.log(linguaSmartVersionInfo.descriptionString());
+		window.__lspriv = window.__lspriv || {};
+		window.__lspriv.params = window.__lspriv.params || {};
+		window.__lspriv.params.customCode = {
+			linguaSmartVersionInfo: linguaSmartVersionInfo
+		};
+		window.__lspriv.params.completingSpinnerEnabled = false;
+	});
+
+	// custom shake menu for version info
+	const menuItems = [{ 
+		title: linguaSmartVersionInfo.name, 
+		onPress: () => Alert.alert(linguaSmartVersionInfo.descriptionString()) 
+	}];
+ 	externalCodeSetup.shakeManagerApi.addMenuItems(menuItems)
+
+	// update the prev/next component on lessons, quizzes and learn topics
+	externalCodeSetup.quizApi.setPrevNextComponent((props) => <PrevNextComponent {...props} />);
+	externalCodeSetup.lessonSingleScreenApi.setPrevNextComponent(props => <PrevNextComponent {...props} />)
+	externalCodeSetup.learnTopicSingleScreenApi.setPrevNextComponent(props => <PrevNextComponent {...props} />)
+
+	// manage lesson navigation
+	externalCodeSetup.lessonSingleScreenApi.setLessonActionComponent(props => <LessonActionComponent {...props} />)
+	externalCodeSetup.lessonSingleScreenApi.setAfterMaterialsComponent(props => <LessonBottomComponent {...props}/>)
+	externalCodeSetup.lessonSingleScreenApi.setLessonContentComponent(props => <LessonContentComponent {...props} />)
+
+	// manage learn topic navigation
+	externalCodeSetup.learnTopicSingleScreenApi.setLearnTopicActionComponent(props => <LearnTopicActionComponent {...props} />)
+
 };
