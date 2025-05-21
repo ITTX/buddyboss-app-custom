@@ -33,8 +33,8 @@ export const applyCustomCode = externalCodeSetup => {
 		};
 		window.__lspriv.params.completingSpinnerEnabled = false;
 		// initialize clarity code
-		// console.log("Initializing Clarity");
-		// initialize('pchrmrr3vi');
+		console.log("Initializing Clarity");
+		initialize('pchrmrr3vi');
 	});
 
 	// custom shake menu for version info
@@ -47,22 +47,38 @@ export const applyCustomCode = externalCodeSetup => {
 	// styles update
 	externalCodeSetup.cssApi.addGlobalStyle("lessonActionButtonContainer", {
 		paddingTop: 6,
-		paddingBottom: 0,
+		paddingBottom: 6,
 		paddingVertical: 0,
+		marginBottom: 0,
+		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("learnTopicActionButtonContainer", {
 		paddingTop: 6,
-		paddingBottom: 0,
+		paddingBottom: 6,
 		paddingVertical: 0,
+		marginBottom: 0,
+		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("quizStartButtonContainer", {
 		paddingTop: 6,
-		paddingBottom: 0,
+		paddingBottom: 6,
 		paddingVertical: 0,
+		marginBottom: 0,
+		marginTop: 0,
+	}, false);
+	externalCodeSetup.cssApi.addGlobalStyle("quizResultButtonContainer", {
+		paddingTop: 6,
+		paddingBottom: 6,
+		paddingVertical: 0,
+		marginBottom: 0,
+		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("courseActionButtonContainer", {
 		paddingHorizontal: 15,
+		paddingBottom: 6,
 		paddingTop: 6,
+		marginTop: 0,
+		marginBottom: 0,
 		paddingBottom: 0,
         zIndex: 1,
 		borderTopWidth: 1/3,
