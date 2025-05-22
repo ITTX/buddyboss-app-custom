@@ -48,29 +48,29 @@ export const applyCustomCode = externalCodeSetup => {
 	externalCodeSetup.cssApi.addGlobalStyle("lessonActionButtonContainer", {
 		paddingTop: 6,
 		paddingBottom: 6,
-		paddingVertical: 0,
-		marginBottom: 0,
+		paddingVertical: null,
+		marginBottom: "0.5em",
 		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("learnTopicActionButtonContainer", {
 		paddingTop: 6,
 		paddingBottom: 6,
-		paddingVertical: 0,
-		marginBottom: 0,
+		paddingVertical: null,
+		marginBottom: "0.5em",
 		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("quizStartButtonContainer", {
 		paddingTop: 6,
 		paddingBottom: 6,
-		paddingVertical: 0,
-		marginBottom: 0,
+		paddingVertical: null,
+		marginBottom: "0.5em",
 		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("quizResultButtonContainer", {
 		paddingTop: 6,
 		paddingBottom: 6,
-		paddingVertical: 0,
-		marginBottom: 0,
+		paddingVertical: null,
+		marginBottom: "0.5em",
 		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("courseActionButtonContainer", {
@@ -78,8 +78,8 @@ export const applyCustomCode = externalCodeSetup => {
 		paddingBottom: 6,
 		paddingTop: 6,
 		marginTop: 0,
-		marginBottom: 0,
-		paddingBottom: 0,
+		marginBottom: "0.5em",
+		paddingVertical: null,
         zIndex: 1,
 		borderTopWidth: 1/3,
 	}, false);

@@ -18,9 +18,11 @@ const LearnTopicActionComponent = ({
   completeDisabled,
   nextObject,
 }) => {
+  console.log(global)
 
   // 1) local completed flag
   const [localCompleted, setLocalCompleted] = useState(topicVM.completed);
+  const iconScale  = useRef(new Animated.Value(localCompleted ? 1 : 0.8)).current;
 
   // 2) two animated values: one for background‐color, one for icon opacity
   const bgAnim = useRef(
@@ -64,13 +66,43 @@ const LearnTopicActionComponent = ({
         duration: 400,
         useNativeDriver: true,        // opacity can be native
       }),
+      Animated.spring(iconScale, {
+        toValue: 1,
+        friction: 4,
+        tension: 80,
+        useNativeDriver: true,
+      }),
     ]).start(() => {
       // 4) after animation, wait then navigate
-      setTimeout(() => {
-        if (nextObject) {
-          window.__lspriv.objectClick(nextObject);
-        }
-      }, 200);
+      // setTimeout(() => {
+      //   if (nextObject) {
+      //     window.__lspriv.objectClick(nextObject);
+      //   }
+      // }, 200);
+      Animated.sequence([
+        Animated.delay(200),
+        Animated.parallel([
+          Animated.timing(iconScale, {
+            toValue: 1.5,         // jump out
+            duration: 300,
+            useNativeDriver: true,
+          }),
+          Animated.timing(iconAnim, {
+            toValue: 0,           // fade out
+            duration: 300,
+            useNativeDriver: true,
+          }),
+        ]),
+      ]).start(() => {
+        // 3) finally navigate
+        if (nextObject) window.__lspriv.objectClick(nextObject);
+        // 4) fase back to original scale
+        Animated.timing(iconScale, {
+          toValue: 1,
+          duration: 100,
+          useNativeDriver: true,
+        }).start();
+      });
     });
   };
 
@@ -120,7 +152,10 @@ const LearnTopicActionComponent = ({
                 )}
 
                 {/** check icon, wrapped in an Animated.View to drive opacity **/}
-                <Animated.View style={{ opacity: iconAnim }}>
+                <Animated.View style={{ 
+                    opacity: iconAnim,
+                    transform: [{ scale: iconScale }]
+                 }}>
                   {localCompleted && (
                     <Icon
                       webIcon=""
