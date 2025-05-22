@@ -96,12 +96,22 @@ const LearnTopicActionComponent = ({
       ]).start(() => {
         // 3) finally navigate
         if (nextObject) window.__lspriv.objectClick(nextObject);
-        // 4) fase back to original scale
-        Animated.timing(iconScale, {
-          toValue: 1,
-          duration: 100,
-          useNativeDriver: true,
-        }).start();
+        // replace this to just set the icon scale and opacity back to 1 after 500ms delay
+        Animated.sequence([
+          Animated.delay(500),
+          Animated.parallel([
+            Animated.timing(iconScale, {
+              toValue: 1,
+              duration: 100,
+              useNativeDriver: true,
+            }),
+            Animated.timing(iconAnim, {
+              toValue: 1,
+              duration: 100,
+              useNativeDriver: true,
+            }),
+          ]),
+        ]).start();
       });
     });
   };
