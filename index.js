@@ -6,7 +6,7 @@ import LessonActionComponent from "./components/LessonActionComponent";
 import LessonContentComponent from './components/LessonContentComponent';
 import LearnTopicActionComponent from "./components/LearnTopicActionComponent";
 
-import { initialize } from '@microsoft/react-native-clarity';
+import * as Clarity from '@microsoft/react-native-clarity'; 
 
 const linguaSmartVersionInfo = {
 		version: "0.1.1",
@@ -34,7 +34,9 @@ export const applyCustomCode = externalCodeSetup => {
 		window.__lspriv.params.completingSpinnerEnabled = false;
 		// initialize clarity code
 		console.log("Initializing Clarity");
-		initialize('pchrmrr3vi');
+		Clarity.initialize('pchrmrr3vi', { 
+			logLevel: Clarity.LogLevel.Verbose, // Note: Use "LogLevel.Verbose" value while testing to debug initialization issues.
+		});
 	});
 
 	// custom shake menu for version info
@@ -49,28 +51,35 @@ export const applyCustomCode = externalCodeSetup => {
 		paddingTop: 6,
 		paddingBottom: 6,
 		paddingVertical: null,
-		marginBottom: "0.5em",
+		marginBottom: -20,
 		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("learnTopicActionButtonContainer", {
 		paddingTop: 6,
 		paddingBottom: 6,
 		paddingVertical: null,
-		marginBottom: "0.5em",
+		marginBottom: -20,
 		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("quizStartButtonContainer", {
 		paddingTop: 6,
-		paddingBottom: 6,
+		paddingBottom: 18,
 		paddingVertical: null,
-		marginBottom: "0.5em",
+		marginBottom: 0,
 		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("quizResultButtonContainer", {
 		paddingTop: 6,
-		paddingBottom: 6,
+		paddingBottom: 18,
 		paddingVertical: null,
-		marginBottom: "0.5em",
+		marginBottom: 0,
+		marginTop: 0,
+	}, false);
+	externalCodeSetup.cssApi.addGlobalStyle("quizSubmitButtonContainer", {
+		paddingTop: 6,
+		paddingBottom: 18,
+		paddingVertical: null,
+		marginBottom: 0,
 		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("courseActionButtonContainer", {
@@ -78,7 +87,7 @@ export const applyCustomCode = externalCodeSetup => {
 		paddingBottom: 6,
 		paddingTop: 6,
 		marginTop: 0,
-		marginBottom: "0.5em",
+		marginBottom: -20,
 		paddingVertical: null,
         zIndex: 1,
 		borderTopWidth: 1/3,
