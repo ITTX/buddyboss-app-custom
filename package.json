@@ -22,5 +22,14 @@
     "eslint": "^9.26.0",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.1.0"
+  },
+  "dependencies": {
+    "@microsoft/react-native-clarity": "^4.3.0"
+  },
+  "nativeDependencies": {
+    "@microsoft/react-native-clarity": "^4.3.0"
+  },
+  "podDependencies": {
+    "react-native-clarity": "@microsoft/react-native-clarity"
   }
 }

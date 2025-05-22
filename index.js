@@ -1,9 +1,12 @@
 import { Alert } from 'react-native';
 import PrevNextComponent from './components/PrevNextB';
+import CourseActionButtons from './components/CourseActionButtons';
 import LessonBottomComponent from "./components/LessonBottomComponent";
 import LessonActionComponent from "./components/LessonActionComponent";
 import LessonContentComponent from './components/LessonContentComponent';
 import LearnTopicActionComponent from "./components/LearnTopicActionComponent";
+
+import * as Clarity from '@microsoft/react-native-clarity'; 
 
 const linguaSmartVersionInfo = {
 		version: "0.1.1",
@@ -20,21 +23,75 @@ export const applyCustomCode = externalCodeSetup => {
 	externalCodeSetup.appInitialisationApi.setHomeScreenPrefetchEnabled(true)
 
 	externalCodeSetup.indexJsApi.addIndexJsFunction(() => {
+		// log version info
 		console.log(linguaSmartVersionInfo.descriptionString());
+		// prepare the custom code params
 		window.__lspriv = window.__lspriv || {};
 		window.__lspriv.params = window.__lspriv.params || {};
 		window.__lspriv.params.customCode = {
 			linguaSmartVersionInfo: linguaSmartVersionInfo
 		};
 		window.__lspriv.params.completingSpinnerEnabled = false;
+		// initialize clarity code
+		console.log("Initializing Clarity");
+		Clarity.initialize('pchrmrr3vi', { 
+			logLevel: Clarity.LogLevel.Verbose, // Note: Use "LogLevel.Verbose" value while testing to debug initialization issues.
+		});
 	});
 
 	// custom shake menu for version info
 	const menuItems = [{ 
 		title: linguaSmartVersionInfo.name, 
-		onPress: () => Alert.alert(linguaSmartVersionInfo.descriptionString()) 
+		onPress: () => Alert.alert(linguaSmarrtVersionInfo.descriptionString()) 
 	}];
  	externalCodeSetup.shakeManagerApi.addMenuItems(menuItems)
+
+	// styles update
+	externalCodeSetup.cssApi.addGlobalStyle("lessonActionButtonContainer", {
+		paddingTop: 6,
+		paddingBottom: 6,
+		paddingVertical: null,
+		marginBottom: -20,
+		marginTop: 0,
+	}, false);
+	externalCodeSetup.cssApi.addGlobalStyle("learnTopicActionButtonContainer", {
+		paddingTop: 6,
+		paddingBottom: 6,
+		paddingVertical: null,
+		marginBottom: -20,
+		marginTop: 0,
+	}, false);
+	externalCodeSetup.cssApi.addGlobalStyle("quizStartButtonContainer", {
+		paddingTop: 6,
+		paddingBottom: 18,
+		paddingVertical: null,
+		marginBottom: 0,
+		marginTop: 0,
+	}, false);
+	externalCodeSetup.cssApi.addGlobalStyle("quizResultButtonContainer", {
+		paddingTop: 6,
+		paddingBottom: 18,
+		paddingVertical: null,
+		marginBottom: 0,
+		marginTop: 0,
+	}, false);
+	externalCodeSetup.cssApi.addGlobalStyle("quizSubmitButtonContainer", {
+		paddingTop: 6,
+		paddingBottom: 18,
+		paddingVertical: null,
+		marginBottom: 0,
+		marginTop: 0,
+	}, false);
+	externalCodeSetup.cssApi.addGlobalStyle("courseActionButtonContainer", {
+		paddingHorizontal: 15,
+		paddingBottom: 6,
+		paddingTop: 6,
+		marginTop: 0,
+		marginBottom: -20,
+		paddingVertical: null,
+        zIndex: 1,
+		borderTopWidth: 1/3,
+	}, false);
 
 	// update the prev/next component on lessons, quizzes and learn topics
 	externalCodeSetup.quizApi.setPrevNextComponent((props) => <PrevNextComponent {...props} />);
@@ -49,4 +106,6 @@ export const applyCustomCode = externalCodeSetup => {
 	// manage learn topic navigation
 	externalCodeSetup.learnTopicSingleScreenApi.setLearnTopicActionComponent(props => <LearnTopicActionComponent {...props} />)
 
+	// course bottom navigation transform
+	externalCodeSetup.courseSingleApi.setTransformCourseActionButtons(CourseActionButtons)
 };
