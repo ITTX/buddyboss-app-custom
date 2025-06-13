@@ -43,7 +43,7 @@ export const applyCustomCode = externalCodeSetup => {
 	// custom shake menu for version info
 	const menuItems = [{ 
 		title: linguaSmartVersionInfo.name, 
-		onPress: () => Alert.alert(linguaSmarrtVersionInfo.descriptionString()) 
+		onPress: () => Alert.alert(linguaSmartVersionInfo.descriptionString()) 
 	}];
  	externalCodeSetup.shakeManagerApi.addMenuItems(menuItems)
 
