@@ -1,4 +1,5 @@
 import { Alert } from 'react-native';
+import { Platform } from 'react-native';
 import PrevNextComponent from './components/PrevNextB';
 import CourseActionButtons from './components/CourseActionButtons';
 import LessonBottomComponent from "./components/LessonBottomComponent";
@@ -9,7 +10,7 @@ import LearnTopicActionComponent from "./components/LearnTopicActionComponent";
 import * as Clarity from '@microsoft/react-native-clarity'; 
 
 const linguaSmartVersionInfo = {
-		version: "0.1.1",
+		version: "0.1.2",
 		name: "LinguaSmart Custom Version",
 		description: "Custom version of LinguaSmart mobile app.",
 		descriptionString: () => {
@@ -46,19 +47,34 @@ export const applyCustomCode = externalCodeSetup => {
 	}];
  	externalCodeSetup.shakeManagerApi.addMenuItems(menuItems)
 
+	//////////////////////////////////////////////////////////////////////////////////
+	// potentially addressing the issues captured on 13.06.2025 on Android devices
+	// - ekran zawartość kursu - guzik za nisko 
+	// - lekcja - guzik za nisko
+	// - zadanie - guzik za nisko
+	// - quiz
+	// 	 - rozpocznij quiz - OK
+	// 	 - następna - OK
+	// 	 - zakończ - OK
+	var platformOffset = 0;
+	if (Platform.OS === 'android') {
+		platformOffset = 20; // Android system buttons bottom bar spacing
+	}
+	//////////////////////////////////////////////////////////////////////////////////
+
 	// styles update
 	externalCodeSetup.cssApi.addGlobalStyle("lessonActionButtonContainer", {
 		paddingTop: 6,
 		paddingBottom: 6,
 		paddingVertical: null,
-		marginBottom: -20,
+		marginBottom: -20 + platformOffset,
 		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("learnTopicActionButtonContainer", {
 		paddingTop: 6,
 		paddingBottom: 6,
 		paddingVertical: null,
-		marginBottom: -20,
+		marginBottom: -20 + platformOffset,
 		marginTop: 0,
 	}, false);
 	externalCodeSetup.cssApi.addGlobalStyle("quizStartButtonContainer", {
@@ -87,7 +103,7 @@ export const applyCustomCode = externalCodeSetup => {
 		paddingBottom: 6,
 		paddingTop: 6,
 		marginTop: 0,
-		marginBottom: -20,
+		marginBottom: -20 + platformOffset,
 		paddingVertical: null,
         zIndex: 1,
 		borderTopWidth: 1/3,
